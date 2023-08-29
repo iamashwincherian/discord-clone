@@ -1,9 +1,12 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
     <main>
-      <section>Discord</section>
+      <section className="m-2">
+        <p>Discord</p>
+        <Button variant={"default"}>Sign In</Button>
+      </section>
     </main>
   );
 }
