@@ -23,6 +23,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import ApiClient from "@/lib/apiClient";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -50,7 +51,11 @@ export default function InitialModal() {
   if (!isMounted) return null;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      await ApiClient.post("/server", values);
+    } finally {
+      form.reset();
+    }
   };
 
   return (
