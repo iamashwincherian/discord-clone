@@ -53,7 +53,7 @@ export default function CreateServerModal() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await ApiClient.post("/server", values);
+      await ApiClient.post("/servers", values);
     } finally {
       handleClose();
     }

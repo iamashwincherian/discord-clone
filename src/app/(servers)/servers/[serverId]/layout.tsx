@@ -1,9 +1,9 @@
+import { ReactNode } from "react";
+import { redirectToSignIn } from "@clerk/nextjs";
+
 import ServerSidebar from "@/components/server/ServerSidebar";
 import { currentProfile } from "@/lib/currentProfile";
 import { db } from "@/lib/db";
-import { redirectToSignIn } from "@clerk/nextjs";
-import { useParams } from "next/navigation";
-import { ReactNode } from "react";
 
 export default async function Layout({
   children,

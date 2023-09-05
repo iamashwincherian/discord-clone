@@ -1,7 +1,8 @@
 "use client";
 
+import CreateServerModal from "@/components/modals/CreateServerModal";
+import InviteModal from "@/components/modals/InviteModal";
 import useFixMount from "@/hooks/useFixMount";
-import CreateServerModal from "../modals/CreateServerModal";
 
 export default function ModalProvider() {
   if (useFixMount()) return;
@@ -9,6 +10,7 @@ export default function ModalProvider() {
   return (
     <>
       <CreateServerModal />
+      <InviteModal />
     </>
   );
 }
