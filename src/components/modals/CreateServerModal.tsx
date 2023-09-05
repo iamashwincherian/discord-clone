@@ -1,8 +1,8 @@
 "use client";
 
-import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
 
 import {
   Dialog,
@@ -20,10 +20,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import ApiClient from "@/lib/apiClient";
+import useFixMount from "@/hooks/useFixMount";
+import { useModal } from "@/hooks/useModalStore";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -32,12 +34,9 @@ const formSchema = z.object({
   imageUrl: z.string().optional(),
 });
 
-export default function InitialModal() {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+export default function CreateServerModal() {
+  const router = useRouter();
+  const { isOpen, onClose, type } = useModal();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -48,18 +47,26 @@ export default function InitialModal() {
   });
 
   const isLoading = form.formState.isSubmitting;
-  if (!isMounted) return null;
+  const isModalOpen = isOpen && type === "createServer";
+
+  if (useFixMount()) return;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await ApiClient.post("/server", values);
     } finally {
-      form.reset();
+      handleClose();
     }
   };
 
+  const handleClose = () => {
+    form.reset();
+    router.refresh();
+    onClose();
+  };
+
   return (
-    <Dialog open>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">

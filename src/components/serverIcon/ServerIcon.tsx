@@ -1,16 +1,16 @@
 import { cn } from "@/lib/utils";
-import useFixMount from "../helpers/useFixMount";
+import useFixMount from "../../hooks/useFixMount";
 
 const COLORS = [
   "#1e3799",
   "#f6b93b",
   "#e55039",
-  // "#b8e994",
-  // "#60a3bc",
-  // "#000000",
+  "#b8e994",
+  "#60a3bc",
+  "#000000",
 ];
 
-const getServerLetters = (name: String) => {
+const getServerLetters = (name: string) => {
   let serverLetters = "";
   const words: string[] = name.split(" ");
 
@@ -23,15 +23,13 @@ const getServerLetters = (name: String) => {
     const lastWord = words[words.length - 1];
 
     // Return the first letter of the first word and the last letter of the last word
-    serverLetters = `${firstWord.charAt(0)}${lastWord.charAt(
-      lastWord.length - 1
-    )}`;
+    serverLetters = `${firstWord.charAt(0)}${lastWord.charAt(0)}`;
   }
 
   return serverLetters;
 };
 
-export default function ServerIcon({ name }: { name: String }) {
+export default function ServerIcon({ name }: { name: string }) {
   const color = COLORS[Math.floor(Math.random() * COLORS.length)];
   if (useFixMount()) return;
   const serverLetters = getServerLetters(name);

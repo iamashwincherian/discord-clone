@@ -7,8 +7,8 @@ import ActionTooltip from "@/components/tooltips/ActionTooltip";
 import ServerIcon from "@/components/serverIcon/ServerIcon";
 
 interface NavigationItemProps {
-  id: String;
-  name: String;
+  id: string;
+  name: string;
 }
 
 export default function NavigationItem({ id, name }: NavigationItemProps) {

@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 
 import { initialProfile } from "@/lib/initialProfile";
+import InitialModal from "@/components/modals/CreateServerModal";
 import { db } from "@/lib/db";
-import InitialModal from "@/components/modals/initialModal";
 
 export default async function SetupPage() {
   const profile = await initialProfile();
